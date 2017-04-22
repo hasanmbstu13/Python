@@ -35,4 +35,58 @@ result = add(1, 3);
 print('''how
 are
 you?''')
+
+
+def area(base,height):
+    '''(number, number) -> number
+
+    Return the area of a triangle with dimensions base and height.
+    '''
+    return base * height / 2
+
+# for doc string
+'''(number, number) -> number
+
+    Return the area of a triangle with dimensions base and height.
+'''
+
+def convert_to_celsius(fahrenheit):
+    '''(number) -> float
+
+    Return the number of Celsius degree equivalent to fahrenheit
+
+    >>> convert_to_cersius(32)
+    0.0
+    >>> convert_to_celsius(212)
+    100.0
+    '''
+
+    return (fahrenheit - 32) * 5 / 9
+
+def perimeter(side1, side2, side3):
+    '''(number, number, number) -> number
+
+    Return the perimeter of the traingle with sides of length side1, side2, side3.
+
+    >>> perimeter(3,4,5)
+    12
+    >>> perimeter(10.5, 6, 9.3)
+    25.8
+    '''
+
+    return side1 + side2 + side3
+
+def semiperimeter(side1, side2, side3):
+    ''' (number, number, number) -> float
+
+    Return the semiperimeter of a triangle with sides of length side1, side2, side3
+
+    >>> semiperimeter(3,4,5)
+    6.0
+    >>> semiperimeter(10.5, 6, 9.3)
+    12.9
+    '''
+
+    return perimeter(side1, side2, side3)/2
+
              
