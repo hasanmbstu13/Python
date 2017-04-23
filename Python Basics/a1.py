@@ -101,7 +101,7 @@ def get_hours(seconds):
 def get_minutes(seconds):
     """ (int) -> int
 
-    Return the total number of hours in the specified number
+    Return the total number of minutes in the specified number
     of seconds.
 
     Precondition: seconds >= 0
@@ -117,6 +117,21 @@ def get_minutes(seconds):
 
 ### Write your get_seconds function definition here:
 
+def get_seconds(seconds):
+    """ (int) -> int
+
+    Return the total number of seconds in the specified number
+    of seconds.
+
+    Precondition: seconds >= 0
+
+    >>> get_seconds(3800)
+    20
+    >>> get_seconds(4000)
+    40
+    """
+
+    return (seconds % 3600) % 60
 
 
 
