@@ -33,7 +33,7 @@ def hours_difference(time_1, time_2):
     0.0
     """
 
-    return (time_2 - time_1) / 3600
+    return seconds_difference(time_1, time_2) / 3600
 
 def to_float_hours(hours, minutes, seconds):
     """ (int, int, int) -> float
@@ -154,6 +154,8 @@ def time_to_utc(utc_offset, time):
     >>> time_to_utc(-1, 23.0)
     0.0
     """
+
+    return (time - utc_offset) % 24
 
 
 
