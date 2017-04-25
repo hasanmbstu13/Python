@@ -182,6 +182,9 @@ def time_from_utc(utc_offset, time):
     0.0
     """
 
+    return (time + utc_offset) % 24
+
+
 
 
 
