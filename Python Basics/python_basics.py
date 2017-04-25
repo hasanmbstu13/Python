@@ -89,4 +89,41 @@ def semiperimeter(side1, side2, side3):
 
     return perimeter(side1, side2, side3)/2
 
+
+def count_letters(word):
+    """ (str) -> int
+
+    Return the number of letters in word.
+    
+    >>> count_letters('hello')
+    5
+    >>> count_letters('bonjour')
+    7
+    """
+
+    return count_vowels(word)+count_consonants(word)
+
+def converts_to_minutes(num_hours):
+    """ (int) -> int
+    Return the number of minutes there are in num_hours hours.
+    >>>convert_to_minutes(2)
+    120
+    """
+
+    minutes = num_hours * 2;
+    return minutes
+
+def converts_to_seconds(num_hours):
+    """ (int) -> int
+    Return the number of seconds there are in num_hours hours.
+    >>>convert_to_minutes(2)
+    7200
+    """
+
+    minutes = convert_to_minutes(num_hours);
+    seconds = minutes * 60;
+    return seconds
+
+seconds = convet_to_seconds(2)
+ 
              
