@@ -125,5 +125,20 @@ def converts_to_seconds(num_hours):
     return seconds
 
 seconds = convet_to_seconds(2)
- 
+
+
+ grade = 80
+ passed = grade >= 50
+
+ # Passed will return True
+
+# Type Converstion
+# input("Enter the number of shoes: ") # returns input will return string
+# solution is
+num_shoes_left = 627
+# num_shoes_wanted = int(input("Enter the number of shoes: "))
+# num_shoes_left >= num_shoes_wanted # return flase
+
+
+
              
