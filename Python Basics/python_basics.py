@@ -139,6 +139,37 @@ num_shoes_left = 627
 # num_shoes_wanted = int(input("Enter the number of shoes: "))
 # num_shoes_left >= num_shoes_wanted # return flase
 
+# In Operator
+
+'cad' in 'abracadre'
+
+'zoo' in 'ooze'
+
+''  in 'adr'
+
+s = "Learn to Program"
+s[9:16]
+s[9:len(s)]
+s[9:]
+s[:8]
+s[:]
+s[1:8]
+s[1:-8]
+s[-15:-8]
+s = s[:5] + 'ed' + s[5:]
+
+white_rabbit = "I'm late! I'm late! For a very important date!"
+white_rabbit.count("ate")
+"computer".capitalize()
+white_rabbit.find('late')
+white_rabbit.find('Late') # will return -1 due to its not find in the string
+white_rabbit.rfind('late') # will return last late here it is 14
+white_rabbit.find('late', 7)
+s = "      I'm sleeping in late  " 
+s.lstrip()                 # remove space of the beginning from the first
+s.rstrip() # remove space of the last from the right
+s.strip() # remove space from both end
+
 
 
              
