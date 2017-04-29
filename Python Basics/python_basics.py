@@ -170,6 +170,11 @@ s.lstrip()                 # remove space of the beginning from the first
 s.rstrip() # remove space of the last from the right
 s.strip() # remove space from both end
 
+# for loop over a string:
+s = 'Hi there!'
+for char in s:
+	print(char)
+
 
 
              
