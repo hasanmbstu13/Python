@@ -115,8 +115,6 @@ def get_complement(nucleotide):
         nucleotide = 'G'
     elif nucleotide == 'G':
         nucleotide = 'C'
-    else:
-        return 'not a valid nucleotide.'
 
     return nucleotide
 
@@ -143,8 +141,6 @@ def get_complementary_sequence(dna_sequence):
         complement_sequence = 'GC'
     elif dna_sequence == 'GC':
         complement_sequence = 'CG'
-    else:
-        return 'not a valid dna sequence.'
 
     return complement_sequence
         
