@@ -93,4 +93,60 @@ def insert_sequence(dna1, dna2, index):
     '''
 
     return dna1[:index] + dna2 + dna1[index:]
+
+def get_complement(nucleotide):
+    ''' (str) -> str
+
+    Return the complement of given nuclotide.
+
+    >>> get_complement('A')
+    T
+    >>> get_complement('T')
+    A
+    >>> get_complement('C')
+    G
+    '''
+
+    if nucleotide == 'A':
+        nucleotide = 'T'
+    elif nucleotide == 'T':
+        nucleotide = 'A'
+    elif nucleotide == 'C':
+        nucleotide = 'G'
+    elif nucleotide == 'G':
+        nucleotide = 'C'
+    else:
+        return 'not a valid nucleotide.'
+
+    return nucleotide
+
+def get_complementary_sequence(dna_sequence):
+    ''' (str) -> str
+
+    Return the complementary sequence of given dna_sequence.
+
+    >>> get_complementary_sequence('AT')
+    TA
+    >>> get_complementary_sequence('TA')
+    AT
+    >>> get_complementary_sequence('CG')
+    GC
+    '''
+
+    complement_sequence = ''
+    
+    if dna_sequence == 'AT':
+        complement_sequence = 'TA'
+    elif dna_sequence == 'TA':
+        complement_sequence = 'AT'
+    elif dna_sequence == 'CG':
+        complement_sequence = 'GC'
+    elif dna_sequence == 'GC':
+        complement_sequence = 'CG'
+    else:
+        return 'not a valid dna sequence.'
+
+    return complement_sequence
+        
+        
     
