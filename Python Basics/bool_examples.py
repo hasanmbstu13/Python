@@ -8,8 +8,10 @@ def is_even(num):
     >>>is_even(77)
     False
     '''
+    return num % 2 == 0
 
-    if num % 2 == 0:
-        return True
-    else:
-        return False
+##    no need to use if condition 
+##    if num % 2 == 0:
+##        return True
+##    else:
+##        return False
