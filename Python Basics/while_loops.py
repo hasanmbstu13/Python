@@ -57,3 +57,15 @@ def get_answer(prompt):
         answer = input(prompt)
 
     return answer
+
+sum = 0
+i = 1523
+while i <= 10503:
+	if (i % 3 == 0):
+		sum = sum + i		
+	i = i + 1
+
+print(sum)
+
+
+

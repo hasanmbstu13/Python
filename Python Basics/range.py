@@ -22,8 +22,40 @@ len(s)
 #    print(i)
 
 sum = 0
-for i in range(524, 10509, 1):
+for i in range(1526, 10505, 3):
     sum = sum + i
 
 
+print(sum)
+
+
+values = []
+for num in range(1, 4):
+    values.append(num * 3)
+print(values)
+
+
+values = []
+for num in range(3, 10, 3):
+    values.append(num)
+print(values)
+
+
+values = []
+for num in range(3, 9, 3):
+    values.append(num)
+print(values)
+
+values = []
+for num in range(1, 3):
+    values.append(num * 3)
+print(values)
+
+sum = 1523
+i = 1523
+while i <= 10503:
+    if (i % 3 == 0):
+        sum = sum + i
+    
+    i = i +1
 print(sum)
