@@ -2,7 +2,7 @@ def compress_list(L):
     """ (list of str) -> list of str
 
     Return a new list with adjacent pairs of string elements
-    from Lconcatenated together, starting with indices 0 and 1, 2 and 3,and so on.
+    from L concatenated together, starting with indices 0 and 1, 2 and 3,and so on.
 
     Precondition: len(L) >= 2 and len(L) % 2 == 0
 
