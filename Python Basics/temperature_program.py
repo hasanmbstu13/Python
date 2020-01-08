@@ -23,9 +23,14 @@ def above_freezing(celsius):
 
 	return celsius > 0
 
-fahrenheit = float(input('Enter the temperature in degrees Fahrenheit: '))
-celsius = convert_to_celsius(fahrenheit)
-if above_freezing(celsius):
-	print('It is above freezing.')
-else:
-	print('It is below freezing.')
+print(__name__)
+
+# __name__ this magic operator is helpful when we import a script in another script
+
+if __name__ == '__main__':
+	fahrenheit = float(input('Enter the temperature in degrees Fahrenheit: '))
+	celsius = convert_to_celsius(fahrenheit)
+	if above_freezing(celsius):
+		print('It is above freezing.')
+	else:
+		print('It is below freezing.')
