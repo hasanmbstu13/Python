@@ -24,3 +24,11 @@ with open('../../lorem.txt', 'r') as file:
 
 print("The first 10 characters:", first_ten_chars)
 print("The rest of the file:", the_rest)
+
+
+# Return contents of a file into a list of strings
+with open('../../lorem.txt', 'r') as file:
+	lines = file.readlines()
+
+print(lines)
+print(lines[0])
