@@ -13,3 +13,14 @@ with open('../../lorem.txt', 'r') as file:
 	contents = file.read()
 
 print(contents)
+
+
+# Test cursor pointing
+with open('../../lorem.txt', 'r') as file:
+	first_ten_chars = file.read(10)
+	# cursor will start after 10 chars
+	the_rest = file.read()
+
+
+print("The first 10 characters:", first_ten_chars)
+print("The rest of the file:", the_rest)
