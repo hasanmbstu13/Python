@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #third party
+    "rest_framework",
+    "django_extensions",
     #first party (mention specific points of the apps)
     'blog.apps.BlogConfig',
     'organizer.apps.OrganizerConfig',
