@@ -25,6 +25,11 @@ class Post(models.Model):
         Startup, related_name="blog_posts"
     )
 
+    class Meta:
+        get_latest_by = "pub_date"
+        ordering = ["-pub_date", "title"]
+        verbose_name = "blog post"
+
 
     def __str__(self):
         date_string = self.pub_date.strftime("%Y-%m-%d")

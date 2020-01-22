@@ -41,6 +41,10 @@ class Startup(models.Model):
     website = models.URLField(max_length=255)
     tags = models.ManyToManyField(Tag)
 
+    class Meta:
+        get_latest_by = "founded_date"
+        ordering = ["name"]
+
     def __str__(self):
         return self.name
 
@@ -54,6 +58,12 @@ class NewsLink(models.Model):
     startup = models.ForeignKey(
         Startup, on_delete=models.CASCADE
     )
+
+    class Meta:
+        get_latest_by = "pub_date"
+        ordering = ["-pub_date"]
+        unique_together = ("slug", "startup")
+        verbose_name = "news article"
 
     def __str__(self):
         return f"{self.startup}: {self.title}"
