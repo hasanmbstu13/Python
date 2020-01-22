@@ -13,6 +13,7 @@ from django.db.models import (
     URLField,
 )
 
+from django_extensions.db.fields import AutoSlugField
 
 class Tag(Model):
     """Labels to help categorize data"""
@@ -21,7 +22,7 @@ class Tag(Model):
         max_length=31,
         unique=True,
     )
-    slug = CharField(
+    slug = SlugField(
         max_length=31,
         unique=True,
         help_text="A label for URL config."
