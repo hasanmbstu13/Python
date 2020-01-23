@@ -1,6 +1,41 @@
-from django.http import HttpResponse
+import json
+
+from django.http import Http404, HttpResponse
 from django.views import View
 
-class HelloWorld(View):
+from .models import Tag
+
+class TagApiDetail(View):
+
+    def get(self, request, pk):
+        try:
+            tag = Tag.objects.get(pk=pk)
+        except Tag.DoesNotExist:
+            raise Http404()
+        tag_json = json.dumps(
+            dict(
+                id=tag.pk,
+                name=tag.name,
+                slug=tag.slug,
+            )
+        )
+        return HttpResponse(tag_json)
+
+
+class TagApiList(View):
+
     def get(self, request):
-        return HttpResponse("Hello again, world!")
+        tag_list = Tag.objects.all()
+        if not tag_list:
+            raise Http404()
+        tag_json = json.dumps(
+            [
+                dict(
+                    id=tag.pk,
+                    name=tag.name,
+                    slug=tag.slug,
+                )
+                for tag in tag_list
+            ]
+        )
+        return HttpResponse(tag_json)
