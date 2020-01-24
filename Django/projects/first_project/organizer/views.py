@@ -1,3 +1,4 @@
+"""Views for Organizer App"""
 import json
 
 from django.http import Http404, HttpResponse
@@ -8,29 +9,19 @@ from django.shortcuts import (
 )
 
 from django.views import View
+from rest_framework.renderers import JSONRenderer
 
+from .serializers import TagSerializer
 from .models import Tag
 
-def serialize_tag_to_dict(tag):
-    return dict(
-        id=tag.pk,
-        name=tag.name,
-        slug=tag.slug,
-    )
-
-def serialize_tag_to_json(tag):
-    return json.dumps(serialize_tag_to_dict(tag))
-
-def serialize_tag_list_to_json(tag_list):
-    return json.dumps(
-        list(map(serialize_tag_to_dict, tag_list))
-    )
-
 class TagApiDetail(View):
+    """Return JSON for single Tag object"""
 
     def get(self, request, pk):
+        """Handle GET HTTP method"""
         tag = get_object_or_404(Tag, pk=pk)
-        tag_json = serialize_tag_to_json(tag)
+        s_tag = TagSerializer(tag)
+        tag_json = JSONRenderer().render(s_tag.data)
         return HttpResponse(
             tag_json,
             content_type="application/json"
@@ -38,12 +29,13 @@ class TagApiDetail(View):
 
 
 class TagApiList(View):
+    """Return JSON for multiple Tag objects"""
 
     def get(self, request):
+        """Handle GET HTTP method"""
         tag_list = get_list_or_404(Tag)
-        if not tag_list:
-            raise Http404()
-        tag_json = serialize_tag_list_to_json(tag_list)
+        s_tag = TagSerializer(tag_list, many=True)
+        tag_json = JSONRenderer().render(s_tag.data)
         return HttpResponse(
             tag_json,
             content_type="application/json"
