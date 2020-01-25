@@ -13,9 +13,14 @@ from .models import Tag
 class TagApiDetail(APIView):
     """Return JSON for single Tag object"""
 
-    def get(self, request, pk):
+    def get(self, request, slug):
         """Handle GET HTTP method"""
-        tag = get_object_or_404(Tag, pk=pk)
+
+        # path parameter and api parameter sholud be same
+        # like here in both cases we use slug
+        # slug=slug first slug is the name of the model
+        # and the slug is the name of the parameter
+        tag = get_object_or_404(Tag, slug=slug)
         s_tag = TagSerializer(
             tag,
             context={"request": request},
