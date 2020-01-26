@@ -26,7 +26,7 @@ class TagSerializer(HyperlinkedModelSerializer):
             } 
         }
 
-class StartupSerializer(ModelSerializer):
+class StartupSerializer(HyperlinkedModelSerializer):
     """Serialize Startup data"""
 
     tags = TagSerializer(many=True)
@@ -34,6 +34,12 @@ class StartupSerializer(ModelSerializer):
     class Meta:
         model = Startup
         fields = "__all__"
+        extra_kwargs = {
+            "url": {
+                "lookup_field": "slug",
+                "view_name": "api-startup-detail",
+            }
+        }
 
 class NewsLinkSerializer(ModelSerializer):
     """Serialize NewsLink data"""

@@ -1,12 +1,28 @@
+"""URL Configuration for Organizer App"""
 from django.urls import path
 
-from .views import TagApiDetail, TagApiList
+from .views import (
+	StartupAPIDetail,
+	StartupAPIList,
+	TagApiDetail, 
+	TagApiList
+)
 
 urlpatterns = [
-    path("", TagApiList.as_view(), name="api-tag-list"),
+    path("tag/", TagApiList.as_view(), name="api-tag-list"),
     path(
-        "<str:slug>/",
+        "tag/<str:slug>/",
         TagApiDetail.as_view(),
         name="api-tag-detail"
+    ),
+    path(
+    	"startup/",
+    	StartupAPIList.as_view(),
+    	name="api-startup-list",
+    ),
+    path(
+    	"startup/<str:slug>/",
+    	StartupAPIDetail.as_view(),
+    	name="api-startup-detail",
     ),
 ]

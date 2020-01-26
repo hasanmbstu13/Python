@@ -1,42 +1,36 @@
 """Views for Organizer App"""
-from django.shortcuts import (
-    get_list_or_404,
-    get_object_or_404,
+
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView,
 )
 
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from .models import Startup, Tag
+from .serializers import StartupSerializer, TagSerializer
 
-from .serializers import TagSerializer
-from .models import Tag
-
-class TagApiDetail(APIView):
+class TagApiDetail(RetrieveAPIView):
     """Return JSON for single Tag object"""
 
-    def get(self, request, slug):
-        """Handle GET HTTP method"""
-
-        # path parameter and api parameter sholud be same
-        # like here in both cases we use slug
-        # slug=slug first slug is the name of the model
-        # and the slug is the name of the parameter
-        tag = get_object_or_404(Tag, slug=slug)
-        s_tag = TagSerializer(
-            tag,
-            context={"request": request},
-        )
-        return Response(s_tag.data)
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    lookup_field = "slug"
 
 
-class TagApiList(APIView):
+class TagApiList(ListAPIView):
     """Return JSON for multiple Tag objects"""
 
-    def get(self, request):
-        """Handle GET HTTP method"""
-        tag_list = get_list_or_404(Tag)
-        s_tag = TagSerializer(
-            tag_list,
-            many=True,
-            context={"request": request},
-        )
-        return Response(s_tag.data)
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+class StartupAPIDetail(RetrieveAPIView):
+    """Handle GET HTTP method"""
+
+    queryset = Startup.objects.all()
+    serializer_class = StartupSerializer
+    lookup_field = "slug"
+
+class StartupAPIList(ListAPIView):
+    """Return JSON for multiple Startup objects"""
+
+    queryset = Startup.objects.all()
+    serializer_class = StartupSerializer
