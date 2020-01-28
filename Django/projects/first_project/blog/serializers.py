@@ -17,6 +17,7 @@ from organizer.serializers import (
 )
 
 class PostSerializer(ModelSerializer):
+    """Serialize Post data"""
 
     tags = TagSerializer(many=True)
     startup = StartupSerializer(many=True)
