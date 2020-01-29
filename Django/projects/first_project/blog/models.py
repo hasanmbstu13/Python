@@ -11,7 +11,7 @@ from django.db.models import (
 )
 
 from organizer.models import Startup, Tag
-
+from django.urls import reverse
 
 class Post(Model):
     """Blog post; news article about startup"""
@@ -41,3 +41,14 @@ class Post(Model):
     def __str__(self):
         date_string = self.pub_date.strftime("%Y-%m-%d")
         return f"{self.title} on {date_string}"
+
+    def get_absolute_url(self):
+        """Return URL to detail page of Post"""
+        return reverse(
+            "post_detail",
+            kwargs={
+                "year": self.pub_date.year,
+                "month": self.pub_date.month,
+                "slug": self.slug,
+            },
+        )
