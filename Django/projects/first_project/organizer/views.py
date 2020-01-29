@@ -1,13 +1,10 @@
 """Views for Organizer App"""
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from django.template import loader
-from django.views.decorators.http import require_safe
+from django.shortcuts import get_object_or_404, render
+from django.views import  View
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
 )
-
 from .models import NewsLink, Startup, Tag
 from .serializers import (
     NewsLinkSerializer,
@@ -16,23 +13,23 @@ from .serializers import (
 )
 
 
-@require_safe
-def tag_list(request):
-    """Render an HTML templae of a list of tags"""
-    tag_list = Tag.objects.all()
-    template = loader.get_template("tag/list.html")
-    context = {"tag_list": tag_list}
-    html_content = template.render(context)
-    return HttpResponse(html_content)
+class TagList(View):
+    """Display a list of Tags"""
 
-@require_safe
-def tag_detail(request, slug):
-    """Render an HTML template of a tags"""
-    tag = get_object_or_404(Tag, slug=slug)
-    template = loader.get_template("tag/detail.html")
-    context = {"tag": tag}
-    html_content = template.render(context)
-    return HttpResponse(html_content)
+    def get(self, request):
+        """Render an HTML template of a list of tags"""
+        tag_list = Tag.objects.all()
+        context = {"tag_list": tag_list}
+        return render(request, "tag/list.html", context)
+
+class TagDetail(View):
+    """Display a single Tag"""
+
+    def get(self, request, slug):
+        """Render an HTML template of a tags"""
+        tag = get_object_or_404(Tag, slug=slug)
+        context = {"tag": tag}
+        return render(request, "tag/detail.html", context)
 
 class TagApiDetail(RetrieveAPIView):
     """Return JSON for single Tag object"""
