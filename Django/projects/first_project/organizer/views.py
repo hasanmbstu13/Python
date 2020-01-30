@@ -5,7 +5,8 @@ from rest_framework.generics import (
     ListAPIView,
     ListCreateAPIView,
     RetrieveAPIView,
-    RetrieveUpdateAPIView
+    # RetrieveUpdateAPIView
+    RetrieveUpdateDestroyAPIView
 )
 # from rest_framework.response import Response
 # from rest_framework.status import (
@@ -52,7 +53,7 @@ class StartupDetail(DetailView):
     template_name = "startup/detail.html"
 
 # class TagApiDetail(RetrieveAPIView):
-class TagApiDetail(RetrieveUpdateAPIView):
+class TagApiDetail(RetrieveUpdateDestroyAPIView):
     """Return JSON for single Tag object"""
 
     queryset = Tag.objects.all()
@@ -95,11 +96,11 @@ class TagApiDetail(RetrieveUpdateAPIView):
     #         s_tag.errors, status=HTTP_400_BAD_REQUEST
     #     )
 
-    def delete(self, request, slug):
-        """DELETE the Tag with specified slug"""
-        tag = self.get_object()
-        tag.delete()
-        return Response(status=HTTP_204_NO_CONTENT)
+    # def delete(self, request, slug):
+    #     """DELETE the Tag with specified slug"""
+    #     tag = self.get_object()
+    #     tag.delete()
+    #     return Response(status=HTTP_204_NO_CONTENT)
 
 
 # class TagApiList(ListAPIView):
