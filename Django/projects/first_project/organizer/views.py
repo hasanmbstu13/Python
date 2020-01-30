@@ -16,6 +16,9 @@ from rest_framework.generics import (
 #     HTTP_201_CREATED,
 #     HTTP_400_BAD_REQUEST
 # )
+from rest_framework.response import Response
+from rest_framework.status import HTTP_204_NO_CONTENT
+
 from .models import NewsLink, Startup, Tag
 from .serializers import (
     NewsLinkSerializer,
@@ -91,6 +94,12 @@ class TagApiDetail(RetrieveUpdateAPIView):
     #     return Response(
     #         s_tag.errors, status=HTTP_400_BAD_REQUEST
     #     )
+
+    def delete(self, request, slug):
+        """DELETE the Tag with specified slug"""
+        tag = self.get_object()
+        tag.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
 
 
 # class TagApiList(ListAPIView):
