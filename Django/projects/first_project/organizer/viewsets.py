@@ -55,3 +55,25 @@ class TagViewSet(ViewSet):
         return Response(
             s_tag.errors, status=HTTP_400_BAD_REQUEST
         )
+
+    def partial_update(self, request, slug):
+        """Update a Tag object partially"""
+        tag = get_object_or_404(Tag, slug=slug)
+        s_tag = TagSerializer(
+            tag,
+            data=request.data,
+            partial=True,
+            context={"request": request},
+        )
+        if s_tag.is_valid():
+            s_tag.save()
+            return Response(s_tag.data)
+        return Response(
+            s_tag.errors, status=HTTP_400_BAD_REQUEST
+        )
+
+    def delete(self, request, slug):
+        """Delete a Tag object"""
+        tag = get_object_or_404(Tag, slug=slug)
+        tag.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
