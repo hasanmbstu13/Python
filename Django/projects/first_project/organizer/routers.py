@@ -5,15 +5,16 @@ from rest_framework.routers import SimpleRouter
 from .views import (
     NewsLinkAPIDetail,
     NewsLinkAPIList,
-	StartupAPIDetail,
-	StartupAPIList,
+	# StartupAPIDetail,
+	# StartupAPIList,
 	# TagApiDetail,
 	# TagApiList
 )
-from .viewsets import TagViewSet
+from .viewsets import StartupViewSet, TagViewSet
 
 api_router = SimpleRouter()
-api_router.register("tag", TagViewSet, base_name="api-tag")
+api_router.register("tag", TagViewSet, basename="api-tag")
+api_router.register("startup", StartupViewSet, basename="api-startup")
 api_routes = api_router.urls
 
 # tag_create_list = TagViewSet.as_view(
@@ -41,16 +42,16 @@ urlpatterns = api_routes + [
     #     tag_retrieve_update_delete,
     #     name="api-tag-detail"
     # ),
-    path(
-    	"startup/",
-    	StartupAPIList.as_view(),
-    	name="api-startup-list",
-    ),
-    path(
-    	"startup/<str:slug>/",
-    	StartupAPIDetail.as_view(),
-    	name="api-startup-detail",
-    ),
+    # path(
+    # 	"startup/",
+    # 	StartupAPIList.as_view(),
+    # 	name="api-startup-list",
+    # ),
+    # path(
+    # 	"startup/<str:slug>/",
+    # 	StartupAPIDetail.as_view(),
+    # 	name="api-startup-detail",
+    # ),
     path(
         "newslink/",
         NewsLinkAPIList.as_view(),
