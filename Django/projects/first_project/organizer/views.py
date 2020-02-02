@@ -1,12 +1,24 @@
 """Views for Organizer App"""
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.template import loader
-from django.views.decorators.http import require_safe
+from django.views.generic import DetailView, ListView
 from rest_framework.generics import (
     ListAPIView,
+    ListCreateAPIView,
     RetrieveAPIView,
+    # RetrieveUpdateAPIView
+    RetrieveUpdateDestroyAPIView
 )
+# from rest_framework.response import Response
+# from rest_framework.status import (
+#     HTTP_200_OK,
+#     HTTP_400_BAD_REQUEST,
+# )
+# from rest_framework.status import (
+#     HTTP_201_CREATED,
+#     HTTP_400_BAD_REQUEST
+# )
+from rest_framework.response import Response
+from rest_framework.status import HTTP_204_NO_CONTENT
 
 from .models import NewsLink, Startup, Tag
 from .serializers import (
@@ -16,37 +28,101 @@ from .serializers import (
 )
 
 
-@require_safe
-def tag_list(request):
-    """Render an HTML templae of a list of tags"""
-    tag_list = Tag.objects.all()
-    template = loader.get_template("tag/list.html")
-    context = {"tag_list": tag_list}
-    html_content = template.render(context)
-    return HttpResponse(html_content)
+class TagList(ListView):
+    """Display a list of Tags"""
 
-@require_safe
-def tag_detail(request, slug):
-    """Render an HTML template of a tags"""
-    tag = get_object_or_404(Tag, slug=slug)
-    template = loader.get_template("tag/detail.html")
-    context = {"tag": tag}
-    html_content = template.render(context)
-    return HttpResponse(html_content)
+    queryset = Tag.objects.all()
+    template_name = "tag/list.html"
 
-class TagApiDetail(RetrieveAPIView):
+class TagDetail(DetailView):
+    """Display a single Tag"""
+
+    queryset = Tag.objects.all()
+    template_name = "tag/detail.html"
+
+class StartupList(ListView):
+    """Display a list of Startups"""
+
+    queryset = Startup.objects.all()
+    template_name = "startup/list.html"
+
+class StartupDetail(DetailView):
+    """Display a single Startup"""
+
+    queryset = Startup.objects.all()
+    template_name = "startup/detail.html"
+
+# class TagApiDetail(RetrieveAPIView):
+class TagApiDetail(RetrieveUpdateDestroyAPIView):
     """Return JSON for single Tag object"""
 
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     lookup_field = "slug"
 
+    # def put(self, request, slug):
+    #     """Update existing Tag upon PUT
+    #
+    #     All Tag fields are expected.
+    #     """
+    #     # tag = get_object_or_404(Tag, slug=slug)
+    #     tag = self.get_object()
+    #     # s_tag = TagSerializer(
+    #     s_tag = self.serializer_class(
+    #         tag,
+    #         data=request.data,
+    #         context={"request": request}
+    #     )
+    #     if s_tag.is_valid():
+    #         s_tag.save()
+    #         return Response(s_tag.data, status=HTTP_200_OK)
+    #     return Response(
+    #         s_tag.errors, status=HTTP_400_BAD_REQUEST
+    #     )
 
-class TagApiList(ListAPIView):
+    # def patch(self, request, slug):
+    #     """Update existing Tag upon PATCH"""
+    #     tag = self.get_object()
+    #     s_tag = self.serializer_class(
+    #         tag,
+    #         data=request.data,
+    #         partial=True,
+    #         context={"request": request}
+    #     )
+    #     if s_tag.is_valid():
+    #         s_tag.save()
+    #         return Response(s_tag.data, status=HTTP_200_OK)
+    #     return Response(
+    #         s_tag.errors, status=HTTP_400_BAD_REQUEST
+    #     )
+
+    # def delete(self, request, slug):
+    #     """DELETE the Tag with specified slug"""
+    #     tag = self.get_object()
+    #     tag.delete()
+    #     return Response(status=HTTP_204_NO_CONTENT)
+
+
+# class TagApiList(ListAPIView):
+class TagApiList(ListCreateAPIView):
     """Return JSON for multiple Tag objects"""
 
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+
+    # def post(self, request):
+    #     """Create new Tag upon POST"""
+    #     s_tag = self.serializer_class(
+    #         data=request.data, context={"request": request}
+    #     )
+    #     if s_tag.is_valid():
+    #         s_tag.save()
+    #         return Response(
+    #             s_tag.data, status=HTTP_201_CREATED
+    #         )
+    #     return Response(
+    #         s_tag.errors, status=HTTP_400_BAD_REQUEST
+    #     )
 
 class StartupAPIDetail(RetrieveAPIView):
     """Handle GET HTTP method"""
