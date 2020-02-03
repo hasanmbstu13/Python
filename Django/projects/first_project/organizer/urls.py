@@ -24,7 +24,7 @@ urlpatterns = [
     ),
     path("tag/", TagList.as_view(), name="tag_list"),
     path(
-        "tag/create",
+        "tag/create/",
         TagCreate.as_view(),
         name="tag_create",
     ),
